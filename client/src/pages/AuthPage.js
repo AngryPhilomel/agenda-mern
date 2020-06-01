@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import {useHistory} from 'react-router-dom'
 import {AuthContext} from '../context/auth.context'
 import {useHttp} from '../hooks/http.hook'
 
@@ -14,17 +15,24 @@ export const AuthPage = () => {
         setForm({...form, [event.target.name]: event.target.value})
     }
 
+    const history =  useHistory()
     const loginHandler = async () => {
         try {
             const data = await request('/api/auth', 'POST', {...form})
-            auth.login(data.token, data.ldap)
+            auth.login(data.token, data.userId, data.displayName)
+            history.push('/')
         } catch (e) {}
     }
 
-    return(
-        <div className="container">
-            <div>
+    const pressEnter = e => {
+        if (e.key === 'Enter') {
+            loginHandler()
+        }
+    }
 
+
+    return(
+        <div onKeyDown={pressEnter} className="container">
                 <div className="form-group">
                     <label htmlFor="ldap">LDAP</label>
                     <input 
@@ -58,8 +66,6 @@ export const AuthPage = () => {
                 >
                     Войти
                 </button>
-
-            </div>
         </div>
     )
 }

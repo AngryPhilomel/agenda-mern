@@ -21,6 +21,7 @@ const getNewUser = async (ad, sAMAccountName) => {
                displayName: user.displayName
             })
             await newUser.save()
+            return newUser
         }
       });
 }
@@ -56,12 +57,12 @@ router.post('/', async (req, res) => {
                     config.get('jwtSecret'),
                     {expiresIn: '1h'}
                 )
-                const user = await User.findOne({ldap})
+                const user = await User.findOne({ldap}) || await getNewUser(ad, ldap)
 
-                if (!user) {
-                    getNewUser(ad, ldap)
-                }
-                return res.json({token})
+                // if (!user) {
+                //     user = getNewUser(ad, ldap)
+                // }
+                return res.json({token, userId: user.id, displayName: user.displayName})
             }
         })
 

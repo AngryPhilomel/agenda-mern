@@ -4,31 +4,36 @@ const storageName = 'userData'
 
 export const useAuth = () => {
     const [token, setToken] = useState(null)
-    const [ldap, setLdap] = useState(null)
+    const [userId, setUserId] = useState(null)
+    const [displayName, setDisplayName] = useState(null)
     const [ready, setReady] = useState(false)
 
-    const login = useCallback((jwtToken, ldap) => {
+    const login = useCallback((jwtToken, userId, displayName) => {
         setToken(jwtToken)
-        setLdap(ldap)
+        setUserId(userId)
+        setDisplayName(displayName)
         localStorage.setItem(storageName, JSON.stringify({
-            ldap, token: jwtToken
+            userId,
+            token: jwtToken,
+            displayName
         }))
     }, [])
 
     const logout = useCallback(() => {
         setToken(null)
-        setLdap(null)
+        setUserId(null)
+        setDisplayName(null)
         localStorage.removeItem(storageName)
-    })
+    }, [])
 
     useEffect(() => {
         const data = JSON.parse(localStorage.getItem(storageName))
 
-        if (data && data.token) {
-            login(data.token, data.ldap)
+        if (data && data.userId) {
+            login(data.token, data.userId, data.displayName)
         }
         setReady(true)
     }, [login])
 
-    return {login, logout, token, ldap, ready}
+    return {login, logout, token, userId, displayName, ready}
 }

@@ -5,7 +5,6 @@ import {AuthPage} from './pages/AuthPage'
 import {MainPage} from './pages/MainPage'
 
 export const useRoutes = isAuthenticated => {
-    console.log(isAuthenticated)
     if (isAuthenticated) {
         return(
         <Switch>
