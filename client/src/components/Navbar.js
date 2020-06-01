@@ -13,14 +13,14 @@ export const Navbar = ({displayName}) => {
 
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand navbar-light bg-light">
             <NavLink className="navbar-brand" to="/">AGENDA</NavLink>
            
             <div className="collapse navbar-collapse" id="navbarText">
                 <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
+                {/* <li className="nav-item">
                     <NavLink className="nav-link" to="#">Новый календарь</NavLink>
-                </li>
+                </li> */}
                 <li className="nav-item">
                     <span className="nav-link">{displayName}</span>
                 </li>

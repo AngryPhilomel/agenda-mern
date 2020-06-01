@@ -1,9 +1,12 @@
 import React from 'react'
+import { CreateCalendar } from '../components/CreateCalendar'
+import { AllCalendars } from '../components/AllCalendars'
 
 export const MainPage = () => {
     return(
-        <div>
-            <h1>MainPage</h1>
+        <div className="container mt-2">
+            <CreateCalendar/>
+            <AllCalendars/>
         </div>
     )
 }

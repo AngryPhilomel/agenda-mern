@@ -52,12 +52,12 @@ router.post('/', async (req, res) => {
                 return res.status(400).json({message: 'Неверные имя пользователя и/или пароль.'})
             } else if (auth) {
                 haveAccess = auth
+                const user = await User.findOne({ldap}) || await getNewUser(ad, ldap)
                 const token = jwt.sign(
-                    {ldap},
+                    {userId: user.id},
                     config.get('jwtSecret'),
                     {expiresIn: '1h'}
                 )
-                const user = await User.findOne({ldap}) || await getNewUser(ad, ldap)
 
                 // if (!user) {
                 //     user = getNewUser(ad, ldap)
