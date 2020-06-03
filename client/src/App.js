@@ -5,6 +5,7 @@ import { useAuth } from './hooks/auth.hook';
 import {useRoutes} from './routes'
 import { Loader } from './components/Loader';
 import { Navbar } from './components/Navbar';
+import { CalendarState } from './context/calendar/CalendarState';
 
 function App() {
   const {token, login, logout, userId, displayName, ready} = useAuth()
@@ -19,12 +20,14 @@ function App() {
     <AuthContext.Provider value={{
       token, login, logout, userId, displayName, isAuthenticated
     }}>
-      <Router>
-        {isAuthenticated && <Navbar displayName={displayName}/>}
-        <div className="container-fluid">
-          {routes}
-        </div>
-      </Router>
+      <CalendarState>
+        <Router>
+          {isAuthenticated && <Navbar displayName={displayName}/>}
+          <div className="container-fluid">
+            {routes}
+          </div>
+        </Router>
+      </CalendarState>
     </AuthContext.Provider>
   )
 }
