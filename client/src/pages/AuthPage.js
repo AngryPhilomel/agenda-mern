@@ -1,18 +1,21 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import {AuthContext} from '../context/auth.context'
 import {useHttp} from '../hooks/http.hook'
 
 export const AuthPage = () => {
     const auth = useContext(AuthContext)
-    const {loading, request, error, clearError} = useHttp()
+    const {request} = useHttp()
     const [form, setForm] = useState({
         ldap: '',
         password: '',
     })
 
+
+
     const changeHandler = event => {
         setForm({...form, [event.target.name]: event.target.value})
+        
     }
 
     const history =  useHistory()

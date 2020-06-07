@@ -3,11 +3,15 @@ import {Switch, Route, Redirect} from 'react-router-dom'
 
 import {AuthPage} from './pages/AuthPage'
 import {MainPage} from './pages/MainPage'
+import {CalendarPage} from './pages/CalendarPage'
 
 export const useRoutes = isAuthenticated => {
     if (isAuthenticated) {
         return(
         <Switch>
+            <Route path="/calendar/:id">
+                <CalendarPage/>
+            </Route>
             <Route path="/">
                 <MainPage/>
             </Route>

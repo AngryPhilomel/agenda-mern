@@ -6,11 +6,14 @@ import {useRoutes} from './routes'
 import { Loader } from './components/Loader';
 import { Navbar } from './components/Navbar';
 import { CalendarState } from './context/calendar/CalendarState';
+import { CurrentState } from './context/currentCalendar/CurrentState'
+// import { Alert } from './components/Alert';
 
 function App() {
   const {token, login, logout, userId, displayName, ready} = useAuth()
   const isAuthenticated = !!token
   const routes = useRoutes(isAuthenticated)
+
 
   if (!ready) {
     return <Loader/>
@@ -21,12 +24,15 @@ function App() {
       token, login, logout, userId, displayName, isAuthenticated
     }}>
       <CalendarState>
+        <CurrentState>
         <Router>
           {isAuthenticated && <Navbar displayName={displayName}/>}
           <div className="container-fluid">
             {routes}
           </div>
         </Router>
+        {/* <Alert/> */}
+        </CurrentState>
       </CalendarState>
     </AuthContext.Provider>
   )

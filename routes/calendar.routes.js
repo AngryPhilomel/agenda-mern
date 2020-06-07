@@ -27,17 +27,25 @@ router.get('/', auth, async(req, res) => {
     try {
         
         const user = await User.findById(req.user.userId)
-            .populate('calendars')
+            .populate({
+                path: 'calendars',
+                select: '_id title'
+            })
+            
         
-        res.status(200).json({message: user.calendars})
+        res.status(200).json({calendars: user.calendars})
     } catch (e) {
         res.status(500).json({message: `Что-то пошло не так: ${e.message}`})
     }
 })
 
-// const getCalendar = async id => {
-//     const cal = await Calendar.findById(id)
-//     return await cal
-// }
+router.get('/:id', auth, async(req, res) => {
+    try {
+        const calendar = await Calendar.findById(req.params.id)
+        res.status(200).json({calendar})
+    } catch (e) {
+        res.status(500).json({message: `Что-то пошло не так: ${e.message}`})
+    }
+}) 
 
 module.exports = router

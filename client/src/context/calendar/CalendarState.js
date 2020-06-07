@@ -1,7 +1,7 @@
 import React, {useReducer, useCallback, useContext} from 'react'
 import { CalendarContext } from './CalendarContext'
 import { calendarReducer } from './calendarReducer'
-import { GET_CALENDARS, CREATE_CALENDAR } from '../types'
+import { GET_CALENDARS} from '../types'
 import {AuthContext} from '../auth.context'
 import {useHttp} from '../../hooks/http.hook'
 
@@ -19,7 +19,7 @@ export const CalendarState = ({children}) => {
                 })
                 dispatch({
                     type: GET_CALENDARS,
-                    payload: calendarsServer.message
+                    payload: calendarsServer.calendars
                 })
             } catch (e) {}
         }, [token, request])
@@ -31,7 +31,7 @@ export const CalendarState = ({children}) => {
             })
             getAll()
         } catch (e) {}
-    })
+    }, [token, request, getAll])
 
     
 
