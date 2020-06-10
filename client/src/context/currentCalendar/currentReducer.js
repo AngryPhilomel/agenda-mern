@@ -4,7 +4,6 @@ const handlers = {
     [GET_CALENDAR]: (state, {payload}) => {
         const cal = payload.calendar
         state = {...state, calendar: cal}
-        console.log(state)
         return state
     },
     DEFAULT: state => state
