@@ -2,10 +2,12 @@ import React, { useContext, useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import {AuthContext} from '../context/auth.context'
 import {useHttp} from '../hooks/http.hook'
+// import { Alert } from '../components/Alert'
+import { Alert } from 'react-bootstrap';
 
 export const AuthPage = () => {
     const auth = useContext(AuthContext)
-    const {request} = useHttp()
+    const {request, error, clearError, status} = useHttp()
     const [form, setForm] = useState({
         ldap: '',
         password: '',
@@ -35,6 +37,7 @@ export const AuthPage = () => {
 
 
     return(
+        <>
         <div onKeyDown={pressEnter} className="container">
                 <div className="form-group">
                     <label htmlFor="ldap">LDAP</label>
@@ -69,6 +72,10 @@ export const AuthPage = () => {
                 >
                     Войти
                 </button>
+                <Alert className="mt-2" show={error} onClose={clearError} variant={status === 202 ? 'success' : 'danger'} dismissible>
+                   {error}
+                </Alert>
         </div>
+        </>
     )
 }

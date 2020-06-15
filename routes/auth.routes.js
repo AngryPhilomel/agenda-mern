@@ -21,7 +21,8 @@ const getNewUser = async (ad, sAMAccountName) => {
                displayName: user.displayName
             })
             await newUser.save()
-            return newUser
+            return await User.findOne({sAMAccountName})
+            
         }
       });
 }
@@ -53,16 +54,23 @@ router.post('/', async (req, res) => {
             } else if (auth) {
                 haveAccess = auth
                 const user = await User.findOne({ldap}) || await getNewUser(ad, ldap)
-                const token = jwt.sign(
-                    {userId: user.id},
-                    config.get('jwtSecret'),
-                    {expiresIn: '8h'}
-                )
-
                 // if (!user) {
-                //     user = getNewUser(ad, ldap)
+                //     getNewUser(ad, ldap)
+                //     user = await User.findOne({ldap})
                 // }
-                return res.json({token, userId: user.id, displayName: user.displayName})
+
+                try {
+                    const token = jwt.sign(
+                        {userId: user.id},
+                        config.get('jwtSecret'),
+                        {expiresIn: '8h'}
+                    )
+    
+                    return res.json({token, userId: user.id, displayName: user.displayName})
+                } catch (e) {
+                    res.status(202).json({message: `Пользователь создан, попытайтесь войти снова!`})
+                }
+                
             }
         })
 

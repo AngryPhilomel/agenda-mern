@@ -28,7 +28,7 @@ export const CalendarState = ({children}) => {
         try {
             await request('/api/calendar/new', 'POST', {title}, {
                     Authorization: `Bearer ${token}`
-            })
+                })
             getAll()
         } catch (e) {}
     }, [token, request, getAll])
