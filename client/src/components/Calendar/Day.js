@@ -8,7 +8,7 @@ export const Day = ({day, month, year}) => {
         
     }
     return(
-    <td onClick={clickHandler}>{day}</td>
+    <td style={{width: '60px'}} onClick={clickHandler}>{day}</td>
     
     )
 }
