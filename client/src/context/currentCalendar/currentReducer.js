@@ -1,4 +1,4 @@
-import {GET_CALENDAR} from '../types'
+import {GET_CALENDAR, NEXT_YEAR, PAST_YEAR, ACTUAL_YEAR} from '../types'
 
 const handlers = {
     [GET_CALENDAR]: (state, {payload}) => {
@@ -6,6 +6,21 @@ const handlers = {
         state = {...state, calendar: cal}
         return state
     },
+    [NEXT_YEAR]: (state, {payload}) => {
+        const date = payload
+        state = {...state, date}
+        return state
+    },
+    [PAST_YEAR]: (state, {payload}) => {
+        const date = payload
+        state = {...state, date}
+        return state
+    },
+    [ACTUAL_YEAR]: (state, {payload}) => {
+        const date = payload
+        state = {...state, date}
+        return state
+    }, 
     DEFAULT: state => state
 }
 

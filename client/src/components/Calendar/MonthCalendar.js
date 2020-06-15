@@ -49,6 +49,16 @@ export const MonthCalendar = ({date}) => {
             <thead>
                 <tr>
                     <th className="text-uppercase text-center" colSpan="7">{stringDate}</th>
+                   
+                </tr>
+                <tr>
+                <th className="text-uppercase text-center">ПН</th>
+                <th className="text-uppercase text-center">ВТ</th>
+                <th className="text-uppercase text-center">СР</th>
+                <th className="text-uppercase text-center">ЧТ</th>
+                <th className="text-uppercase text-center">ПТ</th>
+                <th className="text-uppercase text-center">СБ</th>
+                <th className="text-uppercase text-center">ВС</th>
                 </tr>
             </thead>
             <tbody>

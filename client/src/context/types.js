@@ -1,3 +1,6 @@
 export const GET_CALENDARS = 'GET_CALENDARS'
 export const CREATE_CALENDAR = 'CREATE_CALENDAR'
 export const GET_CALENDAR = 'GET_CALENDAR'
+export const NEXT_YEAR = 'NEXT_YEAR'
+export const PAST_YEAR = 'PAST_YEAR'
+export const ACTUAL_YEAR = 'ACTUAL_YEAR'

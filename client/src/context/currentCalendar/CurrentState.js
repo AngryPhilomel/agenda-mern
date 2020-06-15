@@ -1,9 +1,9 @@
 import React, {useReducer, useCallback, useContext} from 'react'
 import {CurrentContext} from './currentContext'
 import {currentReducer} from './currentReducer'
-import { GET_CALENDAR } from '../types'
-import { useHttp } from '../../hooks/http.hook'
-import { AuthContext } from '../auth.context'
+import {GET_CALENDAR, NEXT_YEAR, PAST_YEAR, ACTUAL_YEAR} from '../types'
+import {useHttp} from '../../hooks/http.hook'
+import {AuthContext} from '../auth.context'
 
 export const CurrentState = ({children}) => {
     const initialState = {
@@ -25,13 +25,38 @@ export const CurrentState = ({children}) => {
             })
         } catch (e) {}
     }, [request, token])
+
+    const nextYear = () => {
+        const newDate = new Date(state.date).setFullYear(new Date(state.date).getFullYear()+1)
+        dispatch({
+            type: NEXT_YEAR,
+            payload: newDate
+        })
+    }
+
+    const pastYear = () => {
+        const newDate = new Date(state.date).setFullYear(new Date(state.date).getFullYear()-1)
+        dispatch({
+            type: PAST_YEAR,
+            payload: newDate
+        })
+    }
+
+    const actualYear = () => {
+        const newDate = Date.now()
+        dispatch({
+            type: ACTUAL_YEAR,
+            payload: newDate
+        })
+    }
+        
     const {calendar, date} = state
          
 
     return(
         <CurrentContext.Provider value={{
             calendar, date,
-            getCalendar
+            getCalendar, nextYear, pastYear, actualYear
         }}>
             {children}
         </CurrentContext.Provider>
