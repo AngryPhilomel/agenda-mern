@@ -11,7 +11,7 @@ export const FullYearCalendar = ({selectDate}) => {
     }
     getFullYear(selectDate)
     const renderFullYear = fullYear.map(month => {
-        return(<div className="col-auto"> <MonthCalendar key={month} date={month}/> </div>)
+        return(<div key={month} className="col-auto"> <MonthCalendar date={month}/> </div>)
     })
 
     return (
