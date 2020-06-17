@@ -7,7 +7,7 @@ import {useHttp} from '../../hooks/http.hook'
 
 export const CalendarState = ({children}) => {
     const [state, dispatch] = useReducer(calendarReducer, null)
-
+    
     const {request} = useHttp()
     const {token} = useContext(AuthContext)
     

@@ -5,12 +5,14 @@ const path = require('path')
 
 const authRouter = require('./routes/auth.routes')
 const calendarRouter = require('./routes/calendar.routes')
+const usersRouter = require('./routes/users.router')
 
 const app = express()
 
 app.use(express.json({extended:true}))
 app.use('/api/auth', authRouter)
 app.use('/api/calendar', calendarRouter)
+app.use('/api/users', usersRouter)
 
 if (process.env.NODE_ENV === 'production') {
     app.use('/', express.static(path.join(__dirname, 'client', 'build')))

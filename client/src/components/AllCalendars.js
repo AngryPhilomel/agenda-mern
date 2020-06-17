@@ -17,7 +17,7 @@ export const AllCalendars = () => {
     if (loading) {
         return <Loader/>
     }
-    if (calendars) {
+    if (calendars || !loading) {
         return (
             <ul className="list-group list-group-flush">
             
@@ -29,7 +29,8 @@ export const AllCalendars = () => {
                 ): null}
             </ul>
         )
-    } else {
+    } 
+    if (!calendars && !loading) {
         return(
             <div>Здесь ничего нет</div>
         )

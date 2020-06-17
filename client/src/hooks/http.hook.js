@@ -1,11 +1,13 @@
 import {useState, useCallback} from 'react'
 import {useAuth} from './auth.hook'
+import {useHistory} from 'react-router-dom'
 
 export const useHttp = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
     const [status, setStatus] = useState(null)
     const {logout} = useAuth()
+    const history =  useHistory()
 
     const request = useCallback(async (url, method = 'GET', body = null, headers = {}) => {
         setLoading(true)
@@ -17,6 +19,7 @@ export const useHttp = () => {
             const response = await fetch(url, {method, body, headers})
             if (response.status === 401) {
                 logout()
+                history.push('/')
             }
             const data = await response.json()
 
@@ -33,7 +36,7 @@ export const useHttp = () => {
             setError(e.message)
             throw e
         }
-    }, [logout])
+    }, [logout, history])
 
     const clearError = useCallback(() => setError(null), [])
 

@@ -3,6 +3,7 @@ import {useParams} from 'react-router-dom'
 import { Loader } from '../components/Loader'
 import { CurrentContext } from '../context/currentCalendar/currentContext'
 import {FullYearCalendar} from '../components/Calendar/FullYearCalendar'
+import {FindUser} from '../components/FindUser'
 
 
 export const CalendarPage = () => {
@@ -16,11 +17,19 @@ export const CalendarPage = () => {
 
     return (
     <>
-    {calendar ? calendar.title : <Loader/>}<hr/>
-    <div className="btn-group" role="group">
+    {calendar ? <p className="text-justify">{calendar.title}</p> : <Loader/>}
+    <hr/>
+    <div className="row d-flex justify-content-between">
+
+    <div className="col-2 btn-group" role="group">
         <button onClick={pastYear} type="button" className="btn btn-secondary">Прошлый</button>
         <button onClick={actualYear} type="button" className="btn btn-secondary">Текущий</button>
         <button onClick={nextYear} type="button" className="btn btn-secondary">Следующий</button>
+    </div>
+   
+
+    <FindUser className="col-2" calendar={linkId}/>
+
     </div>
     <hr/>
     {/* {new Date(date).toLocaleDateString('RU')} {new Date(date).toLocaleTimeString('RU')} */}
