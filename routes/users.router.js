@@ -7,7 +7,7 @@ const router = Router()
 router.post('/', auth, async(req, res) => {
     const {query} = req.body
     const regexp = new RegExp(`${query}`, "i")
-    if (query.match(/600/)) {
+    if (query.match(/[0-9]{1,8}/)) {
         const users = await User.find({ ldap : regexp }, function (err, docs) { })
         return res.json({message: users})
     } else {
