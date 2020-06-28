@@ -2,7 +2,6 @@ import React, { useContext, useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import {AuthContext} from '../context/auth.context'
 import {useHttp} from '../hooks/http.hook'
-// import { Alert } from '../components/Alert'
 import { Alert } from 'react-bootstrap';
 
 export const AuthPage = () => {

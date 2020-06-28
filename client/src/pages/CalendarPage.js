@@ -4,12 +4,14 @@ import { Loader } from '../components/Loader'
 import { CurrentContext } from '../context/currentCalendar/currentContext'
 import {FullYearCalendar} from '../components/Calendar/FullYearCalendar'
 import {FindUser} from '../components/FindUser'
+import { AuthContext } from '../context/auth.context'
 
 
 export const CalendarPage = () => {
     const linkId = useParams().id
     
     const {calendar, date, getCalendar, nextYear, pastYear, actualYear} = useContext(CurrentContext)
+    const {userId} = useContext(AuthContext)
 
     useEffect(() => {
         getCalendar(linkId)
@@ -18,6 +20,8 @@ export const CalendarPage = () => {
     return (
     <>
     {calendar ? <p className="text-justify">{calendar.title}</p> : <Loader/>}
+    
+    {/* {calendar.admins.includes(userId, 0) ? userId : null} */}
     <hr/>
     <div className="row d-flex justify-content-between">
 
@@ -27,8 +31,9 @@ export const CalendarPage = () => {
         <button onClick={nextYear} type="button" className="btn btn-secondary">Следующий</button>
     </div>
    
-
-    <FindUser className="col-2" calendar={linkId}/>
+    {calendar.admins == userId ? <FindUser className="col-2" calendar={linkId}/> : null}
+    
+    
 
     </div>
     <hr/>

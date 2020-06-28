@@ -26,7 +26,6 @@ export const FindUser = ({calendar}) => {
     }
 
     const clickHandler = useCallback(() => {
-        const q = query
         setTimeout(() => {
             updateList()
         },[500])
@@ -52,7 +51,7 @@ export const FindUser = ({calendar}) => {
 
         <OverlayTrigger
                 trigger="click"
-                key='left'
+                rootClose='true'
                 placement='left'
                 overlay={
                     <Popover id={`popover-positioned`}>

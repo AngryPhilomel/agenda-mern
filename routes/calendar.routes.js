@@ -2,7 +2,7 @@ const {Router} = require('express')
 const auth = require('../middleware/auth.middleware')
 const Calendar = require('../models/Calendar')
 const User = require('../models/User')
-const { findById } = require('../models/Calendar')
+const Event = require('../models/Event')
 
 const router = Router()
 
@@ -45,6 +45,9 @@ router.get('/', auth, async(req, res) => {
 router.get('/:id', auth, async(req, res) => {
     try {
         const calendar = await Calendar.findById(req.params.id)
+        .populate({
+            path: 'events'
+        })
         res.status(200).json({calendar})
     } catch (e) {
         res.status(500).json({message: `Что-то пошло не так: ${e.message}`})
@@ -93,6 +96,26 @@ router.post('/:id/removeuser', auth, async(req, res) => {
 
         res.status(200).json({message: 'Пользователь удален'})
 
+    } catch (e) {
+        res.status(500).json({message: `Что-то пошло не так: ${e.message}`})
+    }
+})
+
+router.post('/:id/addevent', async (req, res) => {
+    const {title, description, owner, period, date} = req.body
+    try {
+        const event = new Event({
+            title, description, owner, period, date
+        })
+        event.save()
+        console.log(event)
+        const calendar = Calendar.findById(req.params.id, function(err, cal) {
+            if (err) throw err
+            cal.events.push(event._id)
+            cal.save()
+            
+        })
+        res.status(200).json({message: 'Событие создано'})
     } catch (e) {
         res.status(500).json({message: `Что-то пошло не так: ${e.message}`})
     }
