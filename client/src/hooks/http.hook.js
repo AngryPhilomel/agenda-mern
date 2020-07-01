@@ -1,13 +1,19 @@
-import {useState, useCallback} from 'react'
-import {useAuth} from './auth.hook'
+import {useState, useCallback, useContext} from 'react'
 import {useHistory} from 'react-router-dom'
+import { AuthContext } from '../context/auth.context'
 
 export const useHttp = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
     const [status, setStatus] = useState(null)
-    const {logout} = useAuth()
     const history =  useHistory()
+
+    const auth = useContext(AuthContext)
+
+    const logoutHandler = () => {
+        auth.logout()
+        history.push('/')
+    }
 
     const request = useCallback(async (url, method = 'GET', body = null, headers = {}) => {
         setLoading(true)
@@ -18,8 +24,7 @@ export const useHttp = () => {
             }
             const response = await fetch(url, {method, body, headers})
             if (response.status === 401) {
-                logout()
-                history.push('/')
+                logoutHandler()
             }
             const data = await response.json()
 
@@ -36,7 +41,7 @@ export const useHttp = () => {
             setError(e.message)
             throw e
         }
-    }, [logout, history])
+    }, [history])
 
     const clearError = useCallback(() => setError(null), [])
 
