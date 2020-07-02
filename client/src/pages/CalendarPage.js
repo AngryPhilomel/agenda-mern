@@ -38,7 +38,8 @@ export const CalendarPage = () => {
     </div>
     <hr/>
     {/* {new Date(date).toLocaleDateString('RU')} {new Date(date).toLocaleTimeString('RU')} */}
-    <FullYearCalendar selectDate={new Date(date)}/>
+    <FullYearCalendar key={linkId} selectDate={new Date(date)}/>
+    
     {/* <MonthCalendar selectDate={new Date(date)}/> */}
     </>
     )

@@ -3,29 +3,14 @@ import {OverlayTrigger, Popover, Accordion, Card} from 'react-bootstrap'
 import {CurrentContext} from '../../context/currentCalendar/currentContext'
 
 import {Scheduler} from './Scheduler'
+import { DotFillIcon } from '@primer/octicons-react'
 
-export const Day = ({day, month, year}) => {
+export const Day = ({day, month, year}) => {    
     const [dots, setDots] = useState(false)
     const [marker, setMarker] = useState(null)
     const [parsedEvents, setParsedEvents] = useState(null)
    
     const {calendar} = useContext(CurrentContext)
-
-    
-
-    // const parseEvents = (calendar) => {
-    //     if (calendar.events) {
-    //         const eventDate = new Date(calendar.events[0].date)
-    //        if (eventDate.getFullYear() === year) {
-    //            if (eventDate.getMonth() === month) {
-    //                if (eventDate.getDate() === day) {
-    //                 setDots(true)
-    //                 return (<p>{calendar.events[0].title}</p>)
-    //                }
-    //            }
-    //        }
-    //     }
-    // }
 
     const parseEvents = (calendar) => {
         if (calendar.events) {
@@ -47,8 +32,8 @@ export const Day = ({day, month, year}) => {
 
     const renderDots = () => {
         if (dots){
-            setMarker(<> .</>)
-        }
+            setMarker(<i class="text-primary"><DotFillIcon size={16} /></i>)
+        } 
     }
 
     useEffect(() => {
@@ -58,10 +43,9 @@ export const Day = ({day, month, year}) => {
     useEffect(() => {
         renderDots()
     }, [dots])
-    // нужна нормальная зависимость
+
 
     return(
-    
     <OverlayTrigger
         trigger="click"
         placement='auto'

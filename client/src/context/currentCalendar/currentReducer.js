@@ -3,7 +3,7 @@ import {GET_CALENDAR, NEXT_YEAR, PAST_YEAR, ACTUAL_YEAR} from '../types'
 const handlers = {
     [GET_CALENDAR]: (state, {payload}) => {
         const cal = payload.calendar
-        state = {...state, calendar: cal}
+        state = {...state, calendar: cal, date: Date.now()}
         return state
     },
     [NEXT_YEAR]: (state, {payload}) => {

@@ -20,10 +20,10 @@ export const Week = ({mon}) => {
         }
         for (let i = mon.getDay(); i <= 7; i++) {
             if (mon.getDate() === days_in_month) {
-                week.push(<Day key={mon.getDate()} day={mon.getDate()} month={mon.getMonth()} year={mon.getFullYear()}/>)
+                week.push(<Day key={mon.getDate() + Math.random()} day={mon.getDate()} month={mon.getMonth()} year={mon.getFullYear()}/>)
                 break
             } else {
-                week.push(<Day key={mon.getDate()} day={mon.getDate()} month={mon.getMonth()} year={mon.getFullYear()}/>)
+                week.push(<Day key={mon.getDate() + Math.random()} day={mon.getDate()} month={mon.getMonth()} year={mon.getFullYear()}/>)
                 if (mon.getDay() + 1 === 1) {
                     break
                 } else {
