@@ -5,6 +5,7 @@ import { CurrentContext } from '../context/currentCalendar/currentContext'
 import {FullYearCalendar} from '../components/Calendar/FullYearCalendar'
 import {FindUser} from '../components/FindUser'
 import { AuthContext } from '../context/auth.context'
+import { AddEvent } from '../components/Calendar/AddEvent'
 
 
 export const CalendarPage = () => {
@@ -31,7 +32,7 @@ export const CalendarPage = () => {
         <button onClick={nextYear} type="button" className="btn btn-secondary">Следующий</button>
     </div>
    
-    {calendar.admins == userId ? <FindUser className="col-2" calendar={linkId}/> : null}
+    {calendar.admins == userId ? <div className="col-2"><AddEvent /><FindUser calendar={linkId}/></div> : null}
     
     
 

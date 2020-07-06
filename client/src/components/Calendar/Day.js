@@ -32,7 +32,7 @@ export const Day = ({day, month, year}) => {
 
     const renderDots = () => {
         if (dots){
-            setMarker(<i class="text-primary"><DotFillIcon size={16} /></i>)
+            setMarker(<i className="text-primary"><DotFillIcon size={16} /></i>)
         } 
     }
 
