@@ -49,6 +49,13 @@ export const CurrentState = ({children}) => {
             payload: newDate
         })
     }
+
+    const newEvent = async (event) => {
+        await request(`/api/calendar/${calendar._id}/addevent`, 'POST' , event, {
+            Authorization: `Bearer ${token}`
+        })
+        getCalendar(calendar._id)
+    }
         
     const {calendar, date} = state
          
@@ -56,7 +63,7 @@ export const CurrentState = ({children}) => {
     return(
         <CurrentContext.Provider value={{
             calendar, date,
-            getCalendar, nextYear, pastYear, actualYear
+            getCalendar, nextYear, pastYear, actualYear, newEvent
         }}>
             {children}
         </CurrentContext.Provider>

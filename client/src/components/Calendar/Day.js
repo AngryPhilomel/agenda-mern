@@ -14,17 +14,17 @@ export const Day = ({day, month, year}) => {
 
     const parseEvents = (calendar) => {
         if (calendar.events) {
-            const eventsArray = calendar.events.map((event) => {
-                const eventDate = new Date(event.date)
-                if (eventDate.getFullYear() === year) {
-                if (eventDate.getMonth() === month) {
-                   if (eventDate.getDate() === day) {
-                    setDots(true)
-                    return (event)
+        const eventsArray = calendar.events.filter((event) => {
+                    const eventDate = new Date(event.date)
+                    if (eventDate.getFullYear() === year) {
+                    if (eventDate.getMonth() === month) {
+                       if (eventDate.getDate() === day) {
+                        setDots(true)
+                        return (event)
+                       }
                    }
                }
-           }
-            })
+                })
             return eventsArray
         }
     }
