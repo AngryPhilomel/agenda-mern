@@ -11,12 +11,20 @@ import { AddEvent } from '../components/Calendar/AddEvent'
 export const CalendarPage = () => {
     const linkId = useParams().id
     
-    const {calendar, date, getCalendar, nextYear, pastYear, actualYear} = useContext(CurrentContext)
+    const {calendar, date, leaves, getCalendar, getLeaves, nextYear, pastYear, actualYear} = useContext(CurrentContext)
     const {userId} = useContext(AuthContext)
 
     useEffect(() => {
         getCalendar(linkId)
     }, [getCalendar, linkId])
+
+    useEffect(() => {
+        if(calendar) {
+            getLeaves()
+        }
+    }, [getLeaves, calendar])
+
+    console.log(leaves)
 
     return (
     <>

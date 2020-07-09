@@ -10,7 +10,7 @@ export const Day = ({day, month, year}) => {
     const [marker, setMarker] = useState(null)
     const [parsedEvents, setParsedEvents] = useState(null)
    
-    const {calendar} = useContext(CurrentContext)
+    const {calendar, leaves} = useContext(CurrentContext)
 
     const parseEvents = (calendar) => {
         if (calendar.events) {
